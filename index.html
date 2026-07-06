@@ -223,7 +223,7 @@
     <section class="summary" aria-label="Overall summary">
       <div class="metric">
         <span>Reports</span>
-        <strong id="reportCount">4</strong>
+        <strong id="reportCount">Loading</strong>
       </div>
       <div class="metric">
         <span>Total Samples</span>
@@ -245,6 +245,7 @@
 
   <script>
     const reports = [
+      { title: "API Report", path: "techmart-api-report/" },
       { title: "Register 500 Users", path: "techmart-register-500-users/" },
       { title: "Existing Product 50 Users", path: "techmart-existing-product-50-users/" },
       { title: "Register 1500 Users", path: "techmart-register-1500-users/" },
@@ -295,6 +296,7 @@
       .then((items) => {
         document.getElementById("reports").innerHTML = items.map(({ report, total }) => renderCard(report, total)).join("");
 
+        document.getElementById("reportCount").textContent = formatNumber(items.length);
         const totalSamples = items.reduce((sum, item) => sum + item.total.sampleCount, 0);
         const totalErrors = items.reduce((sum, item) => sum + item.total.errorCount, 0);
         const worstError = Math.max(...items.map((item) => item.total.errorPct));
@@ -305,6 +307,7 @@
       })
       .catch((error) => {
         document.getElementById("reports").innerHTML = `<article class="report-card"><h2>Reports could not be loaded</h2><p>${error.message}</p></article>`;
+        document.getElementById("reportCount").textContent = "N/A";
         document.getElementById("sampleCount").textContent = "N/A";
         document.getElementById("errorCount").textContent = "N/A";
         document.getElementById("worstError").textContent = "N/A";
