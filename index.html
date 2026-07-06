@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechMart Test Reports</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #617087;
+      --line: #dce2ea;
+      --accent: #146c5c;
+      --accent-2: #2356a5;
+      --danger: #b42318;
+      --shadow: 0 18px 45px rgba(23, 32, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    main {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 38px 0 48px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      max-width: 690px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .metric,
+    .report-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 18px;
+      min-height: 106px;
+    }
+
+    .metric span,
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1.7rem;
+      line-height: 1.1;
+    }
+
+    .reports {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .report-card {
+      padding: 20px;
+    }
+
+    .report-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      margin: 5px 0 0;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .status {
+      flex: 0 0 auto;
+      min-width: 84px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e9f7f1;
+      color: #0b6b45;
+      font-size: 0.82rem;
+      font-weight: 760;
+      text-align: center;
+    }
+
+    .status.fail {
+      background: #fee4e2;
+      color: var(--danger);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .stat {
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfcfe;
+    }
+
+    .stat b {
+      display: block;
+      margin-top: 5px;
+      overflow-wrap: anywhere;
+      font-size: 1rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 13px;
+      border-radius: 6px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 760;
+      text-decoration: none;
+    }
+
+    a.button.secondary {
+      border-color: var(--line);
+      background: #fff;
+      color: var(--accent-2);
+    }
+
+    .note {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 820px) {
+      main {
+        width: min(100% - 24px, 680px);
+        padding-top: 24px;
+      }
+
+      .masthead {
+        display: block;
+      }
+
+      .summary,
+      .reports,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="masthead" aria-labelledby="page-title">
+      <div>
+        <span class="label">Performance dashboard</span>
+        <h1 id="page-title">TechMart Test Reports</h1>
+        <p class="subtitle">A simple Vercel-ready index for the four generated JMeter dashboards. Open any full report to inspect charts, response times, throughput, and transaction details.</p>
+      </div>
+    </section>
+
+    <section class="summary" aria-label="Overall summary">
+      <div class="metric">
+        <span>Reports</span>
+        <strong id="reportCount">4</strong>
+      </div>
+      <div class="metric">
+        <span>Total Samples</span>
+        <strong id="sampleCount">Loading</strong>
+      </div>
+      <div class="metric">
+        <span>Total Errors</span>
+        <strong id="errorCount">Loading</strong>
+      </div>
+      <div class="metric">
+        <span>Worst Error Rate</span>
+        <strong id="worstError">Loading</strong>
+      </div>
+    </section>
+
+    <section class="reports" id="reports" aria-label="Reports"></section>
+    <p class="note">Deploy this folder to Vercel. After deployment, this page becomes the home page and each report remains available in its own folder.</p>
+  </main>
+
+  <script>
+    const reports = [
+      { title: "Register 500 Users", path: "techmart-register-500-users/" },
+      { title: "Existing Product 50 Users", path: "techmart-existing-product-50-users/" },
+      { title: "Register 1500 Users", path: "techmart-register-1500-users/" },
+      { title: "Concurrent Orders", path: "techmart-concurrent-orders/" }
+    ];
+
+    const formatNumber = (value, digits = 0) => {
+      if (!Number.isFinite(value)) return "N/A";
+      return new Intl.NumberFormat("en", {
+        maximumFractionDigits: digits,
+        minimumFractionDigits: digits
+      }).format(value);
+    };
+
+    const getTotal = async (report) => {
+      const response = await fetch(`${report.path}statistics.json`);
+      if (!response.ok) throw new Error(`Could not load ${report.path}statistics.json`);
+      const stats = await response.json();
+      return stats.Total || Object.values(stats).find((item) => item.transaction === "Total");
+    };
+
+    const renderCard = (report, total) => {
+      const hasErrors = total.errorCount > 0;
+      return `
+        <article class="report-card">
+          <div class="report-top">
+            <div>
+              <span class="label">JMeter report</span>
+              <h2>${report.title}</h2>
+            </div>
+            <span class="status ${hasErrors ? "fail" : ""}">${hasErrors ? "Errors" : "Passed"}</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><span class="label">Samples</span><b>${formatNumber(total.sampleCount)}</b></div>
+            <div class="stat"><span class="label">Errors</span><b>${formatNumber(total.errorCount)}</b></div>
+            <div class="stat"><span class="label">Avg ms</span><b>${formatNumber(total.meanResTime, 1)}</b></div>
+            <div class="stat"><span class="label">P95 ms</span><b>${formatNumber(total.pct2ResTime, 1)}</b></div>
+          </div>
+          <div class="actions">
+            <a class="button" href="${report.path}">Open full report</a>
+            <a class="button secondary" href="${report.path}statistics.json">View JSON</a>
+          </div>
+        </article>
+      `;
+    };
+
+    Promise.all(reports.map(async (report) => ({ report, total: await getTotal(report) })))
+      .then((items) => {
+        document.getElementById("reports").innerHTML = items.map(({ report, total }) => renderCard(report, total)).join("");
+
+        const totalSamples = items.reduce((sum, item) => sum + item.total.sampleCount, 0);
+        const totalErrors = items.reduce((sum, item) => sum + item.total.errorCount, 0);
+        const worstError = Math.max(...items.map((item) => item.total.errorPct));
+
+        document.getElementById("sampleCount").textContent = formatNumber(totalSamples);
+        document.getElementById("errorCount").textContent = formatNumber(totalErrors);
+        document.getElementById("worstError").textContent = `${formatNumber(worstError, 2)}%`;
+      })
+      .catch((error) => {
+        document.getElementById("reports").innerHTML = `<article class="report-card"><h2>Reports could not be loaded</h2><p>${error.message}</p></article>`;
+        document.getElementById("sampleCount").textContent = "N/A";
+        document.getElementById("errorCount").textContent = "N/A";
+        document.getElementById("worstError").textContent = "N/A";
+      });
+  </script>
+</body>
+</html>
